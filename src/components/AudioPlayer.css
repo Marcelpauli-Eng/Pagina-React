@@ -1,0 +1,161 @@
+.audio-section {
+  margin: 4rem 0;
+  padding: 2rem 0;
+}
+
+.audio-player-container {
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.audio-player {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.audio-player-header {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.audio-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.audio-info {
+  flex: 1;
+}
+
+.audio-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.audio-description {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.audio-play-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+  flex-shrink: 0;
+}
+
+.audio-play-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+.audio-play-button:active {
+  transform: scale(0.95);
+}
+
+.audio-progress-container {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.audio-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.audio-progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.1s linear;
+}
+
+.audio-time {
+  display: flex;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  min-width: 80px;
+  justify-content: flex-end;
+}
+
+.audio-features {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.audio-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.feature-icon {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+  .audio-player {
+    padding: 1.5rem;
+  }
+
+  .audio-player-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .audio-controls {
+    flex-wrap: wrap;
+  }
+
+  .audio-progress-container {
+    width: 100%;
+    order: 3;
+  }
+
+  .audio-time {
+    order: 2;
+    min-width: auto;
+  }
+
+  .audio-features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
