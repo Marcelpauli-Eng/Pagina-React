@@ -3,19 +3,24 @@ import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer id="contact" className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <h3>About</h3>
-          <p>Discover the beauty and culture of our amazing city through immersive experiences.</p>
+          <h3>Sobre Llinars del Vallès</h3>
+          <p>Descobreix la bellesa i la cultura d'aquest poble del Vallès Oriental amb experiències immersives. Un lloc ple d'història, natura i tradició catalana.</p>
         </div>
         <div className="footer-section">
-          <h3>Contact</h3>
-          <p>Email: info@tourismcity.com</p>
-          <p>Phone: +34 123 456 789</p>
+          <h3>Contacte</h3>
+          <p>Ajuntament de Llinars del Vallès</p>
+          <p>Plaça de l'Ajuntament, 1</p>
+          <p>08450 Llinars del Vallès</p>
+          <p>Tel: 938 40 00 01</p>
+          <p>Email: ajuntament@llinarsdelvalles.cat</p>
         </div>
         <div className="footer-section">
-          <h3>Follow Us</h3>
+          <h3>Informació Turística</h3>
+          <p>Turisme Vallès</p>
+          <p>www.turismevalles.com</p>
           <div className="social-links">
             <span>📘</span>
             <span>📷</span>
@@ -24,7 +29,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 Tourism Promotion. All rights reserved.</p>
+        <p>&copy; 2024 Llinars del Vallès - Turisme. Tots els drets reservats.</p>
       </div>
     </footer>
   );

@@ -1,72 +1,129 @@
 .activities-section {
-  margin: 4rem 0;
-  padding: 2rem 0;
+  margin: 8rem 0;
+  padding: 0 2rem;
+  width: 100%;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 900;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+  padding-left: 3rem;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--color-accent-gradient);
+  border-radius: 3px;
 }
 
 .section-subtitle {
-  text-align: center;
-  color: #666;
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
+  text-align: left;
+  color: var(--color-text-secondary);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  margin-bottom: 4rem;
+  font-weight: 300;
+  max-width: 700px;
+  padding-left: 3rem;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .activities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  width: 100%;
 }
 
 .activity-card {
-  background: white;
-  border-radius: 12px;
+  background: var(--color-surface);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
-  border: 3px solid transparent;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  display: flex;
+  flex-direction: column;
 }
 
 .activity-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-accent);
 }
 
 .activity-card.selected {
-  border-color: #667eea;
-  background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
 }
 
-.activity-icon {
+.activity-card.selected:hover {
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);
+}
+
+.activity-selected-badge {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.9);
-  width: 50px;
-  height: 50px;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: var(--color-accent-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  z-index: 3;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .activity-image-container {
   width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 280px;
+  position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-hover) 100%);
+}
+
+.activity-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.activity-card:hover .activity-image {
+  transform: scale(1.15);
 }
 
 .activity-image-placeholder {
@@ -75,77 +132,120 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-border) 100%);
+}
+
+.placeholder-text-small {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.activity-category {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.activity-card:hover .activity-category {
+  background: var(--color-accent-gradient);
+  color: white;
+  transform: scale(1.05);
 }
 
 .activity-content {
-  padding: 1.5rem;
+  padding: 2.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .activity-name {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #333;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.activity-card:hover .activity-name {
+  background: var(--color-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .activity-description {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.activity-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  flex: 1;
 }
 
 .activity-duration {
-  color: #888;
-  font-size: 0.9rem;
-}
-
-.activity-price {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #667eea;
-}
-
-.activity-checkbox {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  width: 30px;
-  height: 30px;
-  background: white;
-  border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #667eea;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 1.2rem;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-hover);
+  border-radius: 10px;
+  width: fit-content;
+  transition: all 0.4s ease;
 }
 
-.activity-card.selected .activity-checkbox {
-  background: #667eea;
+.activity-card:hover .activity-duration {
+  background: var(--color-accent-gradient);
   color: white;
+  transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
   .activities-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .section-subtitle {
+    padding-left: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .activity-image-container {
+    height: 240px;
+  }
+
+  .activity-content {
+    padding: 2rem;
+  }
+
+  .activity-name {
+    font-size: 1.5rem;
   }
 }
-

@@ -1,100 +1,134 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Activities.css';
 
-const Activities = ({ onActivityToggle, selectedActivities }) => {
+const Activities = ({ selectedActivities = [], onActivityToggle }) => {
+  // Forzar re-render cuando cambia selectedActivities
+  useEffect(() => {
+    // Este efecto asegura que el componente se actualice cuando cambia selectedActivities
+  }, [selectedActivities]);
+  const getActivityImage = (id) => {
+    const activityImages = {
+      1: '/multimedia/images/recollida-bolets.jpg', // Recollida de Bolets
+      2: '/multimedia/images/senderisme-montseny.jpg', // Senderisme al Montseny
+      3: '/multimedia/images/torrassa-activitat.jpg', // Visita a la Torrassa del Moro
+      4: '/multimedia/images/castellnou-activitat.jpg', // Visita al Castellnou
+      5: '/multimedia/images/gastronomia.jpg' // Gastronomia (mantener)
+    };
+    return activityImages[id] || '';
+  };
+
   const activities = [
     {
       id: 1,
-      name: 'Historic City Tour',
-      description: 'Explore the rich history and architecture of our city with a guided walking tour.',
-      duration: '2 hours',
-      price: '€25',
-      image: '/multimedia/images/activity-historic.jpg',
-      icon: '🏛️'
+      name: 'Recollida de Bolets',
+      description: 'Participa en la recollida de rovellons i altres bolets durant la temporada d\'octubre.',
+      duration: '3 hores',
+      image: '/multimedia/images/recollida-bolets.jpg',
+      category: 'Natura'
     },
     {
       id: 2,
-      name: 'Food & Culture Experience',
-      description: 'Taste local cuisine and learn about our culinary traditions.',
-      duration: '3 hours',
-      price: '€45',
-      image: '/multimedia/images/activity-food.jpg',
-      icon: '🍽️'
+      name: 'Senderisme al Montseny',
+      description: 'Explora els senders que travessen el Montseny i la Serra del Corredor amb guies locals.',
+      duration: '4 hores',
+      image: '/multimedia/images/senderisme-montseny.jpg',
+      category: 'Natura'
     },
     {
       id: 3,
-      name: 'Sunset Boat Cruise',
-      description: 'Enjoy breathtaking views of the city skyline from the water.',
-      duration: '1.5 hours',
-      price: '€35',
-      image: '/multimedia/images/activity-boat.jpg',
-      icon: '⛵'
+      name: 'Visita a la Torrassa del Moro',
+      description: 'Descobreix la torre de defensa d\'origen romà amb vistes privilegiades del Vallès i el Maresme.',
+      duration: '1.5 hores',
+      image: '/multimedia/images/torrassa-activitat.jpg',
+      category: 'Història'
     },
     {
       id: 4,
-      name: 'Art Gallery Visit',
-      description: 'Discover contemporary and classical art in our renowned galleries.',
-      duration: '2 hours',
-      price: '€20',
-      image: '/multimedia/images/activity-art.jpg',
-      icon: '🎨'
+      name: 'Visita al Castellnou',
+      description: 'Descobreix el castell renaixentista del segle XVI i la seva història fascinant.',
+      duration: '2 hores',
+      image: '/multimedia/images/castellnou-activitat.jpg',
+      category: 'Història'
     },
     {
       id: 5,
-      name: 'Mountain Hiking Adventure',
-      description: 'Experience nature trails with stunning panoramic city views.',
-      duration: '4 hours',
-      price: '€40',
-      image: '/multimedia/images/activity-hiking.jpg',
-      icon: '⛰️'
-    },
-    {
-      id: 6,
-      name: 'Nightlife Tour',
-      description: 'Explore the vibrant nightlife scene with local guides.',
-      duration: '3 hours',
-      price: '€30',
-      image: '/multimedia/images/activity-nightlife.jpg',
-      icon: '🌃'
+      name: 'Gastronomia Local',
+      description: 'Degusta la cuina tradicional catalana al restaurant La Nit de Llinars.',
+      duration: '2.5 hores',
+      image: '/multimedia/images/gastronomia.jpg',
+      category: 'Gastronomia'
     }
   ];
 
-  const isSelected = (activityId) => {
-    return selectedActivities.some(activity => activity.id === activityId);
-  };
-
   return (
     <section id="activities" className="activities-section">
-      <h2 className="section-title">Choose Your Activities</h2>
-      <p className="section-subtitle">
-        Select the activities you'd like to experience during your visit
+      <h2 className="section-title slide-up">Activitats a Llinars del Vallès</h2>
+      <p className="section-subtitle slide-up">
+        Descobreix les activitats que pots fer durant la teva visita al poble
       </p>
       <div className="activities-grid">
-        {activities.map(activity => (
-          <div
-            key={activity.id}
-            className={`activity-card ${isSelected(activity.id) ? 'selected' : ''}`}
-            onClick={() => onActivityToggle(activity)}
-          >
-            <div className="activity-icon">{activity.icon}</div>
-            <div className="activity-image-container">
-              <div className="activity-image-placeholder">
-                {activity.icon}
+        {activities.map((activity, index) => {
+          // Verificar si la actividad está seleccionada comparando IDs
+          const isSelected = (() => {
+            if (!selectedActivities || !Array.isArray(selectedActivities) || selectedActivities.length === 0) {
+              return false;
+            }
+            return selectedActivities.some(a => {
+              if (!a || !a.id || !activity.id) return false;
+              // Comparar IDs como números para asegurar que funcione
+              return Number(a.id) === Number(activity.id);
+            });
+          })();
+          return (
+            <div
+              key={activity.id}
+              className={`activity-card fade-in ${isSelected ? 'selected' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onActivityToggle) {
+                  onActivityToggle(activity);
+                }
+              }}
+            >
+              <div className="activity-image-container">
+                <img 
+                  src={activity.image || getActivityImage(activity.id)}
+                  alt={activity.name}
+                  className="activity-image"
+                  onError={(e) => {
+                    const fallback = getActivityImage(activity.id);
+                    if (fallback && e.target.src !== fallback) {
+                      e.target.src = fallback;
+                    } else {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="activity-image-placeholder" style={{display: 'none'}}>
+                  <div className="placeholder-text-small">{activity.category}</div>
+                </div>
+                <div className="activity-category">{activity.category}</div>
+                {isSelected && (
+                  <div className="activity-selected-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div className="activity-content">
+                <h3 className="activity-name">{activity.name}</h3>
+                <p className="activity-description">{activity.description}</p>
+                <div className="activity-duration">
+                  <span>{activity.duration}</span>
+                </div>
               </div>
             </div>
-            <div className="activity-content">
-              <h3 className="activity-name">{activity.name}</h3>
-              <p className="activity-description">{activity.description}</p>
-              <div className="activity-details">
-                <span className="activity-duration">⏱️ {activity.duration}</span>
-                <span className="activity-price">{activity.price}</span>
-              </div>
-            </div>
-            <div className="activity-checkbox">
-              {isSelected(activity.id) ? '✓' : '+'}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

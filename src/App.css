@@ -2,18 +2,19 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 6rem 2rem;
   width: 100%;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 4rem 1.5rem;
   }
 }
 

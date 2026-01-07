@@ -54,27 +54,27 @@ const AudioPlayer = () => {
 
   return (
     <section id="audio" className="audio-section">
-      <h2 className="section-title">Audio Guide</h2>
-      <p className="section-subtitle">
-        Listen to our city's story and discover its hidden gems
+      <h2 className="section-title slide-up">Guia d'Àudio</h2>
+      <p className="section-subtitle slide-up">
+        Escolta la història de Llinars del Vallès i descobreix els seus racons més especials
       </p>
       
       <div className="audio-player-container">
-        <div className="audio-player">
+        <div className="audio-player fade-in">
           <div className="audio-player-header">
             <div className="audio-icon">🎵</div>
             <div className="audio-info">
-              <h3 className="audio-title">City Audio Guide</h3>
+              <h3 className="audio-title">Guia d'Àudio de Llinars del Vallès</h3>
               <p className="audio-description">
-                A 30+ second audio tour featuring local stories, ambient sounds, 
-                and highlights of our city's most beautiful locations.
+                Un tour d'àudio de més de 30 segons amb històries locals, sons ambientals del poble,
+                i destacats dels llocs més bonics com La Torrassa del Moro, el Castellnou i els paisatges del Montseny.
               </p>
             </div>
           </div>
 
           <audio
             ref={audioRef}
-            src="/multimedia/audio/city-audio-guide.mp3"
+            src="/multimedia/audio/llinars-audio-guide.m4a"
             preload="metadata"
           />
 
@@ -82,7 +82,7 @@ const AudioPlayer = () => {
             <button
               className="audio-play-button"
               onClick={togglePlay}
-              aria-label={isPlaying ? 'Pause' : 'Play'}
+              aria-label={isPlaying ? 'Pausa' : 'Reproduir'}
             >
               {isPlaying ? '⏸️' : '▶️'}
             </button>
@@ -106,15 +106,15 @@ const AudioPlayer = () => {
           <div className="audio-features">
             <div className="audio-feature">
               <span className="feature-icon">🎙️</span>
-              <span>Narrated Guide</span>
+              <span>Guia Narrada</span>
             </div>
             <div className="audio-feature">
-              <span className="feature-icon">🌊</span>
-              <span>Ambient Sounds</span>
+              <span className="feature-icon">🌲</span>
+              <span>Sons Naturals</span>
             </div>
             <div className="audio-feature">
               <span className="feature-icon">📖</span>
-              <span>Local Stories</span>
+              <span>Històries Locals</span>
             </div>
           </div>
         </div>
